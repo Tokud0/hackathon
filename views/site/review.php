@@ -16,12 +16,15 @@ $this->title = 'Отзывы';
     </div>
 <?php endif; ?>
 
-<div class="review-list">
+<div class="row">
     <?php foreach ($reviews as $review): ?>
-        <div class="review-item">
-            <h3><?= Html::encode($review->author) ?> (Оценка: <?= $review->rating ?>)</h3>
-            <p><?= Html::encode($review->text) ?></p>
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><?= Html::encode($review->author) ?> (Оценка: <?= $review->rating ?>)</h5>
+                    <p class="card-text"><?= Html::encode($review->text) ?></p>
+                </div>
+            </div>
         </div>
-        <hr>
     <?php endforeach; ?>
 </div>

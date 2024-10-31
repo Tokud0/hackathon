@@ -132,4 +132,8 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     {
         return $this->auth_key;
     }
+    public function isAdmin(): bool
+    {
+        return $this->mail === 'danilchaikin@mail.ru';
+    }
 }

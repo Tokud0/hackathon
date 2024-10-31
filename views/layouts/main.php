@@ -9,6 +9,7 @@ use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 
@@ -23,7 +24,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>" class="h-100">
 <head>
-    <title><?= Html::encode($this->title) ?></title>
+
+    <title>Мой город </title>
     <?php $this->head() ?>
 </head>
 <body class="d-flex flex-column h-100">
@@ -32,17 +34,17 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <header id="header">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => 'Мой город',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Review', 'url' => ['/site/createreview']],
-            ['label' => 'SignUp', 'url' => ['/site/signup']],
+            ['label' => 'Афиша', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/event/index']],
+            ['label' => 'Отзывы', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/site/review']],
+            ['label' => 'Карты', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/site/map']],
+            ['label' => 'Регистрация', 'url' => ['/site/signup']],
 
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/site/login']]

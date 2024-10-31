@@ -174,6 +174,10 @@ class SiteController extends Controller
         return $this->render('review', [
             'reviews' => $reviews,]);
     }
+    public function actionMap()
+    {
+        return $this->render('map');
 
+    }
 }
 
