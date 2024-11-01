@@ -179,5 +179,9 @@ class SiteController extends Controller
         return $this->render('map');
 
     }
+
+    public function actionEmergency() {
+        return $this->render('emergency');
+    }
 }
 
