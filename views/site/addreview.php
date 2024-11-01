@@ -14,7 +14,7 @@ $this->title = 'Оставить Отзыв';
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'text')->textInput()->label('Отзыва о Петропавловске ') ?>
+    <?= $form->field($model, 'text')->textInput()->label('Отзыв о Петропавловске ') ?>
     <?= $form->field($model, 'rating')->dropDownList([
         '0'=>'0',
         '1'=>'1',

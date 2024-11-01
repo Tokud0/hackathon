@@ -1,4 +1,8 @@
 <?php
+
+use yii\helpers\Html;
+use yii\helpers\Url;
+
 $this->title="Справочник"?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light w-50">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -13,6 +17,12 @@ $this->title="Справочник"?>
         </li>
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#malls">Торговые центры</a>
+        </li>
+        <li class="nav-item">
+            <?php echo Html::button('Карта', [
+                'class' => 'btn btn-custom',
+                'onclick' => "location.href='" . Url::to(['places/index']) . "'"
+            ]); ?>
         </li>
 
 
@@ -101,7 +111,7 @@ $this->title="Справочник"?>
         <h5 class="card-title">Высший колледж имени Магжана Жумабаева</h5>
         <p class="card-text">улица Абая, 28</p>
         <p class="card-text">Пн-Пт: 09:00–19:00, Сб: 09:00-13:00</p>
-        <p class="card-text">+7 (7152) 36 91 36/p>
+        <p class="card-text">+7 (7152) 36 91 36 </p>
         <a href="#" class="btn btn-primary">На сайт</a>
     </div>
 </div>

@@ -45,6 +45,9 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             ['label' => 'Афиша', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/event/index'], 'linkOptions' => ['class' => 'btn btn-dark']],
             ['label' => 'Отзывы', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/site/review'], 'linkOptions' => ['class' => 'btn btn-dark']],
             ['label' => 'Карты', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/site/map'], 'linkOptions' => ['class' => 'btn btn-dark']],
+            ['label' => 'Справочник', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/site/guide'], 'linkOptions' => ['class' => 'btn btn-dark']],
+            ['label' => 'Экстренный Вызов', 'url' => Url::to(['/site/emergency']), 'linkOptions' => ['class' => 'btn btn-danger red-text']],
+
         ]
     ]);
 
