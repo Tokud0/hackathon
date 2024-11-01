@@ -3,9 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Создать Уведомление';
-$this->params['breadcrumbs'][] = ['label' => 'Уведомления', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Создать событие';
+$this->params['breadcrumbs'][] = ['label' => 'событие', 'url' => ['index']];
 ?>
 <div class="notification-create">
     <h1><?= Html::encode($this->title) ?></h1>

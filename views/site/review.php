@@ -8,7 +8,10 @@ use yii\helpers\Html;
 $this->title = 'Отзывы';
 ?>
 
-<h1><?= Html::encode($this->title) ?></h1>
+<h1 class="d-flex justify-content-between align-items-center">
+    <?= Html::encode($this->title) ?>
+    <?= Html::a('Добавить отзыв', ['/site/addreview'], ['class' => 'btn btn-primary']) ?>
+</h1>
 
 <?php if (Yii::$app->session->hasFlash('success')): ?>
     <div class="alert alert-success">

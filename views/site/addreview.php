@@ -5,12 +5,16 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Review */
 /* @var $form yii\widgets\ActiveForm */
+$this->title = 'Оставить Отзыв';
+
 ?>
 
 <div class="review-form">
+    <h1><?= Html::encode($this->title) ?></h1>
+
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'text')->textInput() ?>
+    <?= $form->field($model, 'text')->textInput()->label('Отзыва о Петропавловске ') ?>
     <?= $form->field($model, 'rating')->dropDownList([
         '0'=>'0',
         '1'=>'1',

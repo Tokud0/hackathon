@@ -5,7 +5,6 @@ use yii\widgets\ActiveForm;
 
 $this->title = 'Создать Место';
 $this->params['breadcrumbs'][] = ['label' => 'Место', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="notification-create">
     <h1><?= Html::encode($this->title) ?></h1>

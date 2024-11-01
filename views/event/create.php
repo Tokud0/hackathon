@@ -5,7 +5,6 @@ use yii\widgets\ActiveForm;
 
 $this->title = 'Создать Событие';
 $this->params['breadcrumbs'][] = ['label' => 'Афиша Событий', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="event-create">
     <h1><?= Html::encode($this->title) ?></h1>

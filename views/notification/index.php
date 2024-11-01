@@ -3,13 +3,12 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = 'Уведомления';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Событие';
 ?>
 <div class="notification-index">
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
-        <?= Html::a('Создать Уведомление', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать событие', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <div id="map" style="height: 800px; width: 100%;"></div>
@@ -39,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php endforeach; ?>
 
     function deleteNotification(id, marker) {
-        if (!confirm('Вы уверены, что хотите удалить это уведомление?')) {
+        if (!confirm('Вы уверены, что хотите удалить это событие?')) {
             return;
         }
 
@@ -53,9 +52,9 @@ $this->params['breadcrumbs'][] = $this->title;
             .then(data => {
                 if (data.success) {
                     map.removeLayer(marker);
-                    alert('Уведомление удалено.');
+                    alert('Событие удалено.');
                 } else {
-                    alert('Ошибка при удалении уведомления.');
+                    alert('Ошибка при удалении события.');
                 }
             })
             .catch(error => console.error('Ошибка:', error));

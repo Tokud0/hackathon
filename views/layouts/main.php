@@ -36,31 +36,35 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     NavBar::begin([
         'brandLabel' => 'Мой город',
         'brandUrl' => Yii::$app->homeUrl,
-        'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
+        'options' => ['class' => 'navbar-expand-md navbar-dark bg-info fixed-top']
     ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav'],
-        'items' => [
-            ['label' => 'Афиша', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/event/index']],
-            ['label' => 'Отзывы', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/site/review']],
-            ['label' => 'Карты', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/site/map']],
-            ['label' => 'Регистрация', 'url' => ['/site/signup']],
 
-            Yii::$app->user->isGuest
-                ? ['label' => 'Login', 'url' => ['/site/login']]
-                : '<li class="nav-item">'
-                    . Html::beginForm(['/site/logout'])
-                    . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->first_name . ')',
-                        ['class' => 'nav-link btn btn-link logout']
-                    )
-                    . Html::endForm()
-                    . '</li>'
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav mx-auto'],
+        'items' => [
+            ['label' => 'Афиша', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/event/index'], 'linkOptions' => ['class' => 'btn btn-dark']],
+            ['label' => 'Отзывы', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/site/review'], 'linkOptions' => ['class' => 'btn btn-dark']],
+            ['label' => 'Карты', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/site/map'], 'linkOptions' => ['class' => 'btn btn-dark']],
         ]
     ]);
+
+    echo '<div class="ml-auto">';
+    if (Yii::$app->user->isGuest) {
+        echo Html::a('Войти', ['/site/login'], ['class' => 'nav-link btn btn-dark']);
+    } else {
+        echo Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline']);
+        echo Html::submitButton(
+            'Выйти (' . Yii::$app->user->identity->first_name . ')',
+            ['class' => 'nav-link btn btn-light logout']
+        );
+        echo Html::endForm();
+    }
+    echo '</div>';
+
     NavBar::end();
     ?>
 </header>
+
 
 <main id="main" class="flex-shrink-0" role="main">
     <div class="container">
@@ -72,7 +76,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     </div>
 </main>
 
-<footer id="footer" class="mt-auto py-3 bg-light">
+<footer id="footer" class="mt-auto py-3 bg-info text-white">
     <div class="container">
         <div class="row text-muted">
             <div class="col-md-6 text-center text-md-start">&copy; My Company <?= date('Y') ?></div>

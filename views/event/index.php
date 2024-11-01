@@ -6,12 +6,10 @@ use yii\helpers\Html;
 /* @var $events app\models\Event[] */
 
 $this->title = 'Афиша Событий';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="event-index">
     <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
 
-    <!-- Show add event button only for the specific user -->
     <?php if (Yii::$app->user->identity->mail === 'danilchaikin@mail.ru'): ?>
         <p>
             <?= Html::a('Добавить Событие', ['create'], ['class' => 'btn btn-success']) ?>
