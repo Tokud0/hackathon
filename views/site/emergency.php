@@ -61,7 +61,7 @@ $this->title="Экстренные номера"?>
     <div class="container number" style="background-image: url('/web/images/car03.jpg');">
         <div>
             <p class="title">Полиция</p>
-            <p>Звоните сюда, если на вас напали</p>
+            <p>Нажмите сюда, если на вас напали</p>
         </div>
         <div class="title" style="">
             <nomer>102</nomer>
