@@ -183,5 +183,9 @@ class SiteController extends Controller
     public function actionEmergency() {
         return $this->render('emergency');
     }
+
+    public function actionGuide() {
+        return $this->render("guide");
+    }
 }
 
