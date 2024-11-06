@@ -9,6 +9,7 @@ use yii\base\Exception;
 use yii\base\NotSupportedException;
 use yii\mongodb\ActiveRecord;
 use yii\validators\EmailValidator;
+use yii\validators\NumberValidator;
 use yii\validators\StringValidator;
 
 /**
@@ -19,10 +20,15 @@ use yii\validators\StringValidator;
  * @property string $first_name
  * @property string $last_name
  * @property string $auth_key
+ * @property string $coins
+ * @property string|null $last_reward_date
  */
 
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
+
+    const COINS_FOR_REVIEW = 50;
+    const COINS_FOR_NOT = 20;
     public  static function collectionName():string
     {
         return 'user';
@@ -37,6 +43,8 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
             'first_name',
             'last_name',
             'auth_key',
+            'coins',
+            'last_reward_date',
         ];
     }
 
@@ -46,6 +54,9 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
             [['mail'], EmailValidator::class],
             [['phone_number'], StringValidator::class],
             [['first_name', 'last_name'], StringValidator::class],
+            [['coins'],'integer','min'=>0],
+            [['last_reward_date'], 'date', 'format' => 'php:Y-m-d'],
+
         ];
 
     }
@@ -132,8 +143,45 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     {
         return $this->auth_key;
     }
+    public function addCoins(int $amount): bool
+    {
+        $this->coins += $amount;
+        return $this->save();
+    }
+    public function rewardForComment(): bool
+    {
+        return $this->addCoins(self::COINS_FOR_REVIEW);
+    }
+    public function rewardForNot(): bool
+    {
+        $today = date('Y-m-d');
+
+        if ($this->last_reward_date === $today) {
+            return false;
+        }
+        $this->last_reward_date = $today;
+        return $this->addCoins(self::COINS_FOR_NOT) && $this->save(false);
+    }
     public function isAdmin(): bool
     {
         return $this->mail === 'danilchaikin@mail.ru';
+    }
+    public function buyBusTicket(): bool
+    {
+        $ticketCost = 100;
+
+        if ($this->coins < $ticketCost) {
+            Yii::$app->session->setFlash('error', 'Недостаточно монет для покупки билета.');
+            return false;
+        }
+        $this->coins -= $ticketCost;
+
+        if ($this->save()) {
+            Yii::$app->session->setFlash('success', 'Билет успешно приобретен!');
+            return true;
+        } else {
+            Yii::$app->session->setFlash('error', 'Не удалось приобрести билет. Попробуйте еще раз.');
+            return false;
+        }
     }
 }

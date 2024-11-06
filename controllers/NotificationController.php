@@ -1,6 +1,7 @@
 <?php
 
 namespace app\controllers;
+use app\models\User;
 use Yii;
 use yii\web\Controller;
 use app\models\Notification;
@@ -19,9 +20,15 @@ class NotificationController extends Controller
 
     public function actionCreate()
     {
+        $user = Yii::$app->user->identity;
         $notificationModel = new Notification();
 
         if (Yii::$app->request->isPost && $notificationModel->addNotification(Yii::$app->request->post())) {
+            if ($user instanceof User && $user->rewardForNot()) {
+                Yii::$app->session->setFlash('success', 'Вы получили награду за создание метки!');
+            } else {
+                Yii::$app->session->setFlash('info', 'Сегодня вы уже получили награду за создание метки.');
+            }
             return $this->redirect(['index']);
         }
 

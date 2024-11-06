@@ -42,6 +42,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav mx-auto'],
         'items' => [
+            ['label' => 'Новости', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/news/index'], 'linkOptions' => ['class' => 'btn btn-dark']],
             ['label' => 'Афиша', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/event/index'], 'linkOptions' => ['class' => 'btn btn-dark']],
             ['label' => 'Отзывы', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/site/review'], 'linkOptions' => ['class' => 'btn btn-dark']],
             ['label' => 'Карты', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/site/map'], 'linkOptions' => ['class' => 'btn btn-dark']],
@@ -51,6 +52,13 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         ]
     ]);
 
+    if (!Yii::$app->user->isGuest) {
+        $user = Yii::$app->user->identity;
+        $coins = $user->coins ?? 0;
+        echo Html::a('Баллы: ' . Html::encode($coins), ['site/coins'], [
+            'class' => 'text-decoration-none mr-3',
+        ]);
+    }
     echo '<div class="ml-auto">';
     if (Yii::$app->user->isGuest) {
         echo Html::a('Войти', ['/site/login'], ['class' => 'nav-link btn btn-dark']);

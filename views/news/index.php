@@ -1,0 +1,46 @@
+<?php
+
+use yii\helpers\Html;
+
+/* @var $this yii\web\View */
+/* @var $news app\models\News[] */
+
+$this->title = 'Новости';
+?>
+<div class="news-index">
+    <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
+
+    <?php if (Yii::$app->user->identity->mail === 'danilchaikin@mail.ru'): ?>
+        <p>
+            <?= Html::a('Добавить новость', ['create'], ['class' => 'btn btn-success']) ?>
+        </p>
+    <?php endif; ?>
+
+    <div class="container">
+        <div class="row d-flex align-items-stretch">
+            <?php foreach ($news as $event): ?>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="<?= Html::encode($event->image) ?>" class="card-img-top" alt="Event Image" style="max-height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= Html::encode($event->title) ?></h5>
+                            <p class="card-text"><?= Html::encode($event->description) ?></p>
+                            <p class="card-text"><strong>Дата:</strong> <?= Html::encode($event->date) ?></p>
+                            <p class="card-text"><strong>Место:</strong> <?= Html::encode($event->location) ?></p>
+
+                            <?php if (Yii::$app->user->identity->mail === 'danilchaikin@mail.ru'): ?>
+                                <?= Html::a('Удалить', ['delete', 'id' => (string)$event->_id], [
+                                    'class' => 'btn btn-danger',
+                                    'data' => [
+                                        'confirm' => 'Вы уверены, что хотите удалить эту новость?',
+                                        'method' => 'post',
+                                    ],
+                                ]) ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>

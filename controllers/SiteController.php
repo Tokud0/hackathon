@@ -2,11 +2,13 @@
 
 namespace app\controllers;
 
+use app\models\Event;
 use app\models\forms\ContactForm;
 use app\models\forms\LoginForm;
 use app\models\forms\ReviewForm;
 use app\models\forms\SignUpForm;
 use app\models\Review;
+use app\models\User;
 use Yii;
 use yii\base\Exception;
 use yii\filters\AccessControl;
@@ -156,13 +158,15 @@ class SiteController extends Controller
      */
     public function actionAddreview(): \yii\web\Response|string
     {
+        $user = Yii::$app->user->identity;
         $model = new ReviewForm();
-
         if ($model->load(Yii::$app->request->post()) && $model->addReview()) {
             Yii::$app->session->setFlash('success', 'Отзыв успешно добавлен!');
+            if ($user instanceof User) {
+                $user->rewardForComment();
+            }
             return $this->redirect(['site/review']);
         }
-
         return $this->render('addreview', [
             'model' => $model,
         ]);
@@ -187,5 +191,25 @@ class SiteController extends Controller
     public function actionGuide() {
         return $this->render('guide');
     }
+    public function actionBuyTicket()
+    {
+        $user = Yii::$app->user->identity;
+
+        if ($user->buyBusTicket()) {
+            $filePath = Yii::getAlias('@app/files/ticket.pdf');
+
+            if (file_exists($filePath)) {
+                return Yii::$app->response->sendFile($filePath, 'ticket.pdf');
+            } else {
+                Yii::$app->session->setFlash('error', 'Файл билета не найден.');
+            }
+        }
+
+        return $this->redirect(['site/index']);
+    }
+    public function actionCoins(){
+        return $this->render('coins');
+    }
+
 }
 

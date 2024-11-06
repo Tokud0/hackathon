@@ -3,32 +3,32 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Event;
+use app\models\News;
 use yii\db\StaleObjectException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
-class EventController extends Controller
+class NewsController extends Controller
 {
     public function actionIndex()
     {
-        $events = Event::find()->all();
+        $news = News::find()->all();
 
-        return $this->render('index', ['events' => $events]);
+        return $this->render('index', ['news' => $news]);
     }
 
     public function actionCreate()
     {
-        $model = new Event();
+        $model = new News();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->image = Yii::$app->request->post('Event')['image'];
+            $model->image = Yii::$app->request->post('News')['image'];
 
             if (!empty($model->image)) {
                 if ($model->save()) {
                     return $this->redirect(['index']);
                 } else {
-                    Yii::$app->session->setFlash('error', 'Не удалось сохранить событие.');
+                    Yii::$app->session->setFlash('error', 'Не удалось сохранить новость.');
                 }
             } else {
                 Yii::$app->session->setFlash('error', 'Пожалуйста, загрузите изображение.');
@@ -44,17 +44,17 @@ class EventController extends Controller
      */
     public function actionDelete($id)
     {
-        $event = $this->findModel($id);
+        $news = $this->findModel($id);
 
         if (Yii::$app->user->identity->mail === 'danilchaikin@mail.ru') {
-            $event->delete();
+            $news->delete();
         }
 
         return $this->redirect(['index']);
     }
-    protected function findModel($id): ?Event
+    protected function findModel($id): ?News
     {
-        if (($model = Event::findOne(['_id' => $id])) !== null) {
+        if (($model = News::findOne(['_id' => $id])) !== null) {
             return $model;
         }
 
