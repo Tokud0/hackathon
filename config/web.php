@@ -34,8 +34,7 @@ $config = [
         ],
         'mongodb' => [
             'class' => '\yii\mongodb\Connection',
-            'dsn' => 'mongodb://localhost:27017/hackathon',
-        ],
+            'dsn' => 'mongodb://student-mg.pve.vpn:27017/hackathon',        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [

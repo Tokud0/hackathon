@@ -2,7 +2,7 @@
 
 return [
     'class' => 'yii\mongodb\Connection',
-    'dsn' => 'mongodb://localhost:27017/hackathon',
+    'dsn' => 'mongodb://student-mg.pve.vpn:27017/hackathon',
 ];
 
 
