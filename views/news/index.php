@@ -5,14 +5,14 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $news app\models\News[] */
 
-$this->title = 'Новости';
+$this->title = 'Афиша Событий';
 ?>
-<div class="news-index">
+<div class="event-index">
     <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
 
     <?php if (Yii::$app->user->identity->mail === 'danilchaikin@mail.ru'): ?>
         <p>
-            <?= Html::a('Добавить новость', ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('Добавить Событие', ['create'], ['class' => 'btn btn-success']) ?>
         </p>
     <?php endif; ?>
 
@@ -25,14 +25,12 @@ $this->title = 'Новости';
                         <div class="card-body">
                             <h5 class="card-title"><?= Html::encode($event->title) ?></h5>
                             <p class="card-text"><?= Html::encode($event->description) ?></p>
-                            <p class="card-text"><strong>Дата:</strong> <?= Html::encode($event->date) ?></p>
-                            <p class="card-text"><strong>Место:</strong> <?= Html::encode($event->location) ?></p>
-
+                            <p class="card-text"><strong> <?= Html::encode($event->date) ?> | <?= Html::encode($event->location) ?></strong></p>
                             <?php if (Yii::$app->user->identity->mail === 'danilchaikin@mail.ru'): ?>
                                 <?= Html::a('Удалить', ['delete', 'id' => (string)$event->_id], [
                                     'class' => 'btn btn-danger',
                                     'data' => [
-                                        'confirm' => 'Вы уверены, что хотите удалить эту новость?',
+                                        'confirm' => 'Вы уверены, что хотите удалить это событие?',
                                         'method' => 'post',
                                     ],
                                 ]) ?>

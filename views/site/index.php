@@ -1,40 +1,88 @@
 <?php
 
 /** @var yii\web\View $this */
+/** @var app\models\Review[] $reviews */
+/* @var $events app\models\Event[] */
 
+use yii\helpers\Html;
 use yii\helpers\Url;
+
+function toStars($rating): string
+{
+    $stars = str_repeat('★', $rating) . str_repeat('☆', 5 - $rating);
+    return $stars;
+}
 
 $this->title = 'My Yii Application';
 ?>
 <style>
     body {
-        background-color: #e8e8e8;
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
     }
-    h1 {
-        color: #0dcaf0;
+    h1, h2 {
+        color: #9B51E0;
     }
-    .content {
-        margin-bottom: 30px;
+    .card {
+        border-radius: 0.75rem;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     }
-    .photo img {
+    .card-body {
+        font-size: 0.9rem;
+    }
+    .photo img, .card img {
         border-radius: 0.5rem;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        object-fit: cover;
     }
-
+    .btn-primary {
+        background-color: #9B51E0;
+        border-color: #9B51E0;
+    }
+    .btn-primary:hover {
+        background-color: #823eb0;
+        border-color: #823eb0;
+    }
+    .event-image {
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+    }
+    .content .card-text {
+        color: #555;
+    }
+    .card-image {
+        height: 92%;
+        width: 100%;
+        object-fit: cover;
+    }
+    @media (max-width: 767px) {
+        .col-md-6, .col-md-4 {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+        .content .card {
+            height: auto;
+        }
+        .card img {
+            height: auto;
+            width: 100%;
+        }
+    }
 </style>
+
 <main class="container mt-5 pt-5">
     <h1 class="text-center mb-4">Петропавловск</h1>
 
     <div class="content">
         <div class="card shadow-sm mb-4 border-light rounded" style="height: 400px;">
             <div class="row g-0 h-100">
-                <div class="col-md-6">
-                    <img src="/images/photo1.jpg" class="img-fluid rounded-start" alt="Петропавловск" style="object-fit: cover; height: 98%; width: 100%;">
+                <div class="col-md-6 d-flex">
+                    <img src="/images/photo1.jpg" class="img-fluid rounded-start card-image" alt="Петропавловск">
                 </div>
                 <div class="col-md-6 d-flex flex-column">
-                    <div class="card-body d-flex flex-column">
+                    <div class="card-body">
                         <h5 class="card-title">Общие сведения</h5>
-                        <p class="card-text flex-grow-1">Петропавловск — это административный центр Северо-Казахстанской области, расположенный на севере Казахстана, на берегу реки Ишим. Город, основанный в 1752 году как крепость, сегодня является важным экономическим и культурным центром региона.</p>
+                        <p class="card-text">Петропавловск — это административный центр Северо-Казахстанской области, расположенный на севере Казахстана, на берегу реки Ишим. Город, основанный в 1752 году как крепость.</p>
                     </div>
                 </div>
             </div>
@@ -43,50 +91,48 @@ $this->title = 'My Yii Application';
 
     <div class="content">
         <div class="card shadow-sm mb-4 border-light rounded" style="height: 400px;">
-            <div class="row g-0 h-100">
-                <div class="col-md-6 order-md-2">
-                    <img src="/images/photo2.jpg" class="img-fluid rounded-end" alt="Культурное разнообразие" style="object-fit: cover; height: 92%; width: 100%;">
+            <div class="row g-0 h-100 flex-row-reverse">
+                <div class="col-md-6 d-flex">
+                    <img src="/images/photo2.jpg" class="img-fluid rounded-end card-image" alt="Изображение">
                 </div>
                 <div class="col-md-6 d-flex flex-column">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Культурное разнообразие</h5>
-                        <p class="card-text flex-grow-1">Петропавловск — город на севере Казахстана, известный своим культурным разнообразием. Здесь переплетаются казахские, русские, украинские и другие традиции, создавая уникальную атмосферу. Архитектура Петропавловска отражает многовековую историю: национальные казахские дома, православные храмы и купеческие здания придают городу особый колорит. Культурная жизнь насыщена событиями — работают театры, музеи и филармония. Праздники, такие как Наурыз и День города, объединяют жителей, подчеркивая богатство традиций и дружбы.</p>
+                    <div class="card-body">
+                        <h5 class="card-title">Исторические факты</h5>
+                        <p class="card-text">Петропавловск —  известный своим культурным разнообразием. Здесь переплетаются казахские, русские, украинские и другие традиции, создавая уникальную атмосферу. </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="content">
-        <div class="card shadow-sm mb-4 border-light rounded" style="height: 400px;">
-            <div class="row g-0 h-100">
-                <div class="col-md-6">
-                    <img src="/images/photo3.jpg" class="img-fluid rounded-start" alt="Природа Петропавловска" style="object-fit: cover; height: 100%; width: 100%;">
-                </div>
-                <div class="col-md-6 d-flex flex-column">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Природные ландшафты</h5>
-                        <p class="card-text flex-grow-1">Город окружен живописными природными ландшафтами, включая леса, поля и реки. В окрестностях Петропавловска расположены природные заповедники, где можно насладиться пешими прогулками, рыбалкой и другими активными видами отдыха. Природа региона привлекает туристов и любителей активного отдыха.</p>
+
+    <h2 class="text-center mt-5">Отзывы</h2>
+    <div class="row">
+        <?php foreach ($reviews as $review): ?>
+            <div class="col-md-4 mb-3">
+                <div class="card shadow-sm border-light rounded">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= Html::encode($review->author) ?> (<?= toStars($review->rating) ?>)</h5>
+                        <p class="card-text"><?= Html::encode($review->text) ?></p>
                     </div>
                 </div>
             </div>
-        </div>
+        <?php endforeach; ?>
     </div>
 
-    <div class="content">
-        <div class="card shadow-sm mb-4 border-light rounded" style="height: 400px;">
-            <div class="row g-0 h-100">
-                <div class="col-md-6 order-md-2">
-                    <img src="/images/photo4.jpg" class="img-fluid rounded-end" alt="Культура Петропавловска" style="object-fit: cover; height: 92%; width: 100%;">
-                </div>
-                <div class="col-md-6 d-flex flex-column">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Многонациональность</h5>
-                        <p class="card-text flex-grow-1">Петропавловск — это многонациональный город, где проживают представители различных этнических групп, включая казахов, русских, украинцев и других. Это культурное разнообразие находит отражение в праздниках, традициях и кухне города. Местные жители гордятся своим наследием и активно участвуют в сохранении культурных традиций.</p>
+    <h2 class="text-center mt-5">Афишы</h2>
+    <div class="row">
+        <?php foreach ($events as $event): ?>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="<?= Html::encode($event->image) ?>" class="card-img-top event-image" alt="Event Image">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= Html::encode($event->title) ?></h5>
+                        <p class="card-text"><?= Html::encode($event->description) ?></p>
+                        <p class="card-text"><strong><?= Html::encode($event->date) ?> | <?= Html::encode($event->location) ?></strong></p>
                     </div>
                 </div>
             </div>
-        </div>
+        <?php endforeach; ?>
     </div>
 </main>
-

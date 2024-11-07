@@ -25,9 +25,7 @@ $this->title = 'Афиша Событий';
                         <div class="card-body">
                             <h5 class="card-title"><?= Html::encode($event->title) ?></h5>
                             <p class="card-text"><?= Html::encode($event->description) ?></p>
-                            <p class="card-text"><strong>Дата:</strong> <?= Html::encode($event->date) ?></p>
-                            <p class="card-text"><strong>Место:</strong> <?= Html::encode($event->location) ?></p>
-
+                            <p class="card-text"><strong> <?= Html::encode($event->date) ?> | <?= Html::encode($event->location) ?></strong></p>
                             <?php if (Yii::$app->user->identity->mail === 'danilchaikin@mail.ru'): ?>
                                 <?= Html::a('Удалить', ['delete', 'id' => (string)$event->_id], [
                                     'class' => 'btn btn-danger',

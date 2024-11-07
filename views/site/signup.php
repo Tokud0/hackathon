@@ -11,6 +11,27 @@ use yii\bootstrap5\Html;
 $this->title = 'Регистрация';
 
 ?>
+<style>
+    .login{
+        background-color:#9B51E0 ;
+        color:white;
+    }
+    .login:hover{
+        background-color: white;
+        color:#9B51E0;
+        border-color:#9B51E0;
+    }
+    .signup{
+        border-radius: 0.4em;
+        background-color:white;
+        color:#9B51E0;
+        border-color:#9B51E0;
+    }
+    .signup:hover{
+        background-color:#9B51E0 ;
+        color:white;
+    }
+</style>
 <div class="site-signup">
     <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
 
@@ -38,14 +59,13 @@ $this->title = 'Регистрация';
                     <?= $form->field($model, 'password')->passwordInput()->label('Пароль') ?>
 
                     <div class="form-group">
-                        <?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-primary w-100', 'name' => 'signup-button']) ?>
+                        <?= Html::submitButton('Зарегистрироваться', ['class' => 'btn login w-100', 'name' => 'signup-button']) ?>
+                        <hr>
+                        <p class="text-center"> Уже есть аккаунт?</p>
+                        <?= Html::a('Уже есть аккаунт? Войдите', ['/site/login'], ['class' => 'btn signup w-100']) ?>
                     </div>
-
                     <?php ActiveForm::end(); ?>
                 </div>
-            </div>
-            <div class="text-center">
-                <?= Html::a('Уже есть аккаунт? Войдите', ['/site/login'], ['class' => 'link-secondary']) ?>
             </div>
         </div>
     </div>

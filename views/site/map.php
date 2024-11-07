@@ -14,8 +14,8 @@ use yii\helpers\Url;
         border-radius: 15px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         transition: transform 0.2s;
-        justify-content: center; /* Центрируем по горизонтали */
-        align-items: center; /* Центрируем по вертикали */
+        justify-content: center;
+        align-items: center;
     }
     .card:hover {
         transform: translateY(-5px);
@@ -24,11 +24,11 @@ use yii\helpers\Url;
         font-weight: bold;
     }
     .btn-custom {
-        background-color: #007bff;
+        background-color:#9B51E0;
         color: white;
     }
     .btn-custom:hover {
-        background-color: #0056b3;
+        background-color: #a24eec;
     }
 </style>
 </head>

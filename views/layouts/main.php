@@ -26,40 +26,51 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <head>
 
     <title>Мой город </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+
+    </style>
     <?php $this->head() ?>
 </head>
 <body class="d-flex flex-column h-100">
 <?php $this->beginBody() ?>
 
-<header id="header">
+<header id="header" class="fancy-font bg-light">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Мой город',
+        'brandImage' => '/images/loog.svg',
         'brandUrl' => Yii::$app->homeUrl,
-        'options' => ['class' => 'navbar-expand-md navbar-dark bg-info fixed-top']
+        'options' => ['class' => 'navbar-expand-md navbar-light bg-light tex fixed-top']
     ]);
 
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav mx-auto'],
+        'options' => ['class' => 'navbar-nav w-50 mx-auto'],
         'items' => [
             ['label' => 'Новости', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/news/index'], 'linkOptions' => ['class' => 'btn btn-dark']],
             ['label' => 'Афиша', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/event/index'], 'linkOptions' => ['class' => 'btn btn-dark']],
             ['label' => 'Отзывы', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/site/review'], 'linkOptions' => ['class' => 'btn btn-dark']],
             ['label' => 'Карты', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/site/map'], 'linkOptions' => ['class' => 'btn btn-dark']],
             ['label' => 'Справочник', 'url' => Yii::$app->user->isGuest ? Url::to(['/site/login']) : ['/site/guide'], 'linkOptions' => ['class' => 'btn btn-dark']],
-            ['label' => 'Экстренный Вызов', 'url' => Url::to(['/site/emergency']), 'linkOptions' => ['class' => 'btn btn-danger red-text']],
-
-        ]
+        ],
     ]);
+
+    echo '<div class="container ml-auto d-flex justify-content-center align-items-center w-50 text-decoration-none" style="gap: 15px;">'; // Изменено на justify-content-center
+    echo Html::a(Html::button('Экстренный вызов', [
+        'class' => ' nav-link btn  ',
+        'style' => ' color: red !important; border: none !important;'
+    ]), Url::to(['/site/emergency']));
 
     if (!Yii::$app->user->isGuest) {
         $user = Yii::$app->user->identity;
         $coins = $user->coins ?? 0;
         echo Html::a('Баллы: ' . Html::encode($coins), ['site/coins'], [
-            'class' => 'text-decoration-none mr-3',
+            'class' => 'text-decoration-none',
         ]);
     }
-    echo '<div class="ml-auto">';
+
+    echo '<div>';
     if (Yii::$app->user->isGuest) {
         echo Html::a('Войти', ['/site/login'], ['class' => 'nav-link btn btn-dark']);
     } else {
@@ -72,12 +83,13 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     }
     echo '</div>';
 
+    echo '</div>';
     NavBar::end();
     ?>
 </header>
 
 
-<main id="main" class="flex-shrink-0" role="main">
+<main id="main" class="flex-shrink-0 fancy-font" role="main">
     <div class="container">
         <?php if (!empty($this->params['breadcrumbs'])): ?>
             <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
@@ -87,13 +99,17 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     </div>
 </main>
 
-<footer id="footer" class="mt-auto py-3 bg-info text-white">
-    <div class="container">
-        <div class="row text-muted">
-            <div class="col-md-6 text-center text-md-start">&copy; My Company <?= date('Y') ?></div>
-            <div class="col-md-6 text-center text-md-end"><?= Yii::powered() ?></div>
+<footer class="footer col 12 d-flex">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+            <?php
+            echo Html::img('@web/images/loog.svg', ['alt'=>Yii::$app->name, 'style'=>'height:30px;']);
+            ?>
         </div>
-    </div>
+        <div class="text-center mx-auto mt-3">
+            <p>Email: danilchaykin@bk.ru</p>
+            <p>Телефон: +7 776 524 2927</p>
+        </div>
 </footer>
 
 <?php $this->endBody() ?>

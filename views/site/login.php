@@ -8,9 +8,30 @@
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
 
-$this->title = 'Вход в Аккаунт';
+$this->title = 'Авторизация';
 
 ?>
+<style>
+    .login{
+        background-color:#9B51E0 ;
+        color:white;
+    }
+    .login:hover{
+        background-color: white;
+        color:#9B51E0;
+        border-color:#9B51E0;
+    }
+    .signin{
+        border-radius: 0.4em;
+        background-color:white;
+        color:#9B51E0;
+        border-color:#9B51E0;
+    }
+    .signin:hover{
+        background-color:#9B51E0 ;
+        color:white;
+    }
+</style>
 <div class="site-login">
     <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
 
@@ -35,15 +56,15 @@ $this->title = 'Вход в Аккаунт';
                     <?= $form->field($model, 'password')->passwordInput()->label('Пароль') ?>
 
                     <div class="form-group">
-                        <?= Html::submitButton('Войти', ['class' => 'btn btn-primary w-100', 'name' => 'login-button']) ?>
+                        <?= Html::submitButton('Войти', ['class' => 'btn login w-100', 'name' => 'login-button']) ?>
+                        <hr>
+                        <?= Html::a('Зарегистрироваться', ['/site/signup'], ['class' => 'btn signin w-100']) ?>
                     </div>
 
                     <?php ActiveForm::end(); ?>
                 </div>
             </div>
-            <div class="text-center">
-                <?= Html::a('Зарегистрироваться', ['/site/signup'], ['class' => 'link-secondary']) ?>
-            </div>
+
         </div>
     </div>
 </div>

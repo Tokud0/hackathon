@@ -6,25 +6,28 @@ $this->title="Экстренные номера"?>
         display: flex;
     }
     background-image {
-        width: 300px; /* Ширина блока */
-        height: 200px; /* Высота блока */
-        background-image: url( '/web/images/car03.jpg'); /* Путь к изображению */
-        background-size: cover; /* Масштабирование изображения */
-        background-position: center; /* Центрирование изображения */
-        border: 1px solid #ccc; /* Граница для наглядности */
-        display: flex; /* Для центрирования содержимого */
-        justify-content: center; /* Центрирование по горизонтали */
-        align-items: center; /* Центрирование по вертикали */
-        color: white; /* Цвет текста */
-        font-size: 20px; /* Размер текста */
+        width: 300px;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        border: 1px solid #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center; /
+        color: white;
+        font-size: 20px;
     }
     .number {
-        background-color: lightgrey;
+        border-color: grey;
+
+
         border-radius: 1em;
+        border-width: 2mm;
+        border-style: solid;
         padding: 0.5em;
         display: flex;
         flex-direction: row;
-        width: 40%;
+        width: 70%;
         margin: 1em auto;
     }
     .title {
@@ -38,6 +41,7 @@ $this->title="Экстренные номера"?>
         font-weight: bold;
         font-size: 48pt;
         margin-top: 6em;
+        color: red;
 
     }
     h1{
@@ -55,10 +59,27 @@ $this->title="Экстренные номера"?>
         width:20%;
         margin:1em auto;
     }
+
+    @media (max-width: 900px) {
+        .number{
+            width: 100%;
+        }
+    }
 </style>
 <h1 >Номера экстренных служб</h1>
 <a href="tel:+77765242927">
-    <div class="container number" style="background-image: url('/web/images/car03.jpg');">
+    <div class="container number">
+        <div>
+            <p class="title">Пожарная</p>
+            <p>Нажмите сюда, если вы горите</p>
+        </div>
+        <div class="title">
+            <nomer>101</nomer>
+        </div>
+    </div>
+</a>
+<a href="tel:+77765242927">
+    <div class="container number " style="background-image: url('/web/images/car03.jpg');">
         <div>
             <p class="title">Полиция</p>
             <p>Нажмите сюда, если на вас напали</p>
@@ -81,17 +102,7 @@ $this->title="Экстренные номера"?>
     </div>
 
 </a>
-<a href="tel:+77765242927">
-    <div class="container number">
-        <div>
-            <p class="title">Пожарная</p>
-            <p>Нажмите сюда, если вы горите</p>
-        </div>
-        <div class="title">
-            <nomer>101</nomer>
-        </div>
-    </div>
-</a>
+
 <a href="tel:+77765242927">
     <div class="container number">
         <div>

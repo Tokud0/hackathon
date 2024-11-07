@@ -11,6 +11,7 @@ use app\models\Review;
 use app\models\User;
 use Yii;
 use yii\base\Exception;
+use yii\db\Expression;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -68,7 +69,16 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $allEvents = Event::find()->all();
+        shuffle($allEvents);
+        $events = array_slice($allEvents, 0, 3);
+        $allReviews = Review::find()->all();
+        shuffle($allReviews);
+        $reviews = array_slice($allReviews, 0, 3);
+        return $this->render('index', [
+            'reviews' => $reviews,
+            'events'=> $events,
+        ]);
     }
 
     /**
